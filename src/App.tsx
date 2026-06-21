@@ -1,6 +1,6 @@
-import {useState} from "react"
-import {languages} from "./languages"
-import {getRandomWord} from "./utils"
+import { useState } from "react"
+import { languages } from "./languages"
+import { getRandomWord } from "./utils"
 
 import ConfettiContainer from "./components/ConfettiContainer"
 import Header from './components/Header'
@@ -13,41 +13,41 @@ import NewGameButton from "./components/NewGameButton";
 
 export default function AssemblyEndgame() {
     // State values
-    const [currentWord, setCurrentWord] = useState<string>(():string => getRandomWord())
+    const [currentWord, setCurrentWord] = useState<string>((): string => getRandomWord())
     const [guessedLetters, setGuessedLetters] = useState<string[]>([])
 
 
     // Derived values
-    const numGuessesLeft:number = languages.length - 1
-    const wrongGuessCount:number =
-        guessedLetters.filter((letter:string):boolean => !currentWord.includes(letter)).length
-    const isGameWon:boolean =
-        currentWord.split("").every((letter:string):boolean => guessedLetters.includes(letter))
-    const isGameLost:boolean = wrongGuessCount >= numGuessesLeft
-    const isGameOver:boolean = isGameWon || isGameLost
-    const lastGuessedLetter:string = guessedLetters[guessedLetters.length - 1]
-    const isLastGuessIncorrect:boolean = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
+    const numGuessesLeft: number = languages.length - 1
+    const wrongGuessCount: number =
+        guessedLetters.filter((letter: string): boolean => !currentWord.includes(letter)).length
+    const isGameWon: boolean =
+        currentWord.split("").every((letter: string): boolean => guessedLetters.includes(letter))
+    const isGameLost: boolean = wrongGuessCount >= numGuessesLeft
+    const isGameOver: boolean = isGameWon || isGameLost
+    const lastGuessedLetter: string = guessedLetters[guessedLetters.length - 1]
+    const isLastGuessIncorrect: boolean = !!lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
 
     // Static values
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-    function addGuessedLetter(letter:string):void {
-        setGuessedLetters((prevLetters:string[]):string[] =>
+    function addGuessedLetter(letter: string): void {
+        setGuessedLetters((prevLetters: string[]): string[] =>
             prevLetters.includes(letter) ?
                 prevLetters :
                 [...prevLetters, letter]
         )
     }
 
-    function startNewGame():void {
+    function startNewGame(): void {
         setCurrentWord(getRandomWord())
         setGuessedLetters([])
     }
 
     return (
         <main>
-            <ConfettiContainer isGameWon={isGameWon}/>
-            <Header/>
+            <ConfettiContainer isGameWon={isGameWon} />
+            <Header />
 
             <GameStatus
                 isGameWon={isGameWon}

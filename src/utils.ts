@@ -24,5 +24,5 @@ export function getFarewellText(language: string): string {
         `${language} has left the building`
     ];
 
-    return words[getRandomIndex(options)]
+    return options[getRandomIndex(options)];
 }

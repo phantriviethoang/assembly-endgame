@@ -1,6 +1,6 @@
 type Language = {
-    name: string,
-    backgroundColor: string,
+    name: string
+    backgroundColor: string
     color: string
 }
 
